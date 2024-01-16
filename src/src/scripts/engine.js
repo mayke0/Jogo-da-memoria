@@ -40,17 +40,26 @@ function handleClick() {
   }
 }
 
+function playSound(audioName) {
+  let audio = new Audio(`./audios/${audioName}.mp3`);
+  audio.volume = 0.5;
+  audio.play();
+}
+
 function checkMatch() {
   if (openCards[0].innerHTML === openCards[1].innerHTML) {
     openCards[0].classList.add("boxMatch");
     openCards[1].classList.add("boxMatch");
+    playSound("acerto");
   } else {
     openCards[0].classList.remove("boxOpen");
     openCards[1].classList.remove("boxOpen");
+    playSound("error");
   }
   openCards = [];
 
   if (document.querySelectorAll(".boxMatch").length === emojis.length) {
+    playSound("vencedor");
     alert("Você venceu !");
   }
 }
